@@ -644,6 +644,7 @@ class DictRolloutBuffer(RolloutBuffer):
         action_space: spaces.Space,
         device: Union[th.device, str] = "cpu",
         gae_lambda: float = 1,
+        use_n_step_advantage: bool = False,
         gamma: float = 0.99,
         n_envs: int = 1,
     ):
@@ -653,6 +654,7 @@ class DictRolloutBuffer(RolloutBuffer):
         assert isinstance(self.obs_shape, dict), "DictRolloutBuffer must be used with Dict obs space only"
 
         self.gae_lambda = gae_lambda
+        self.use_n_step_advantage = use_n_step_advantage
         self.gamma = gamma
         self.observations, self.actions, self.rewards, self.advantages = None, None, None, None
         self.returns, self.episode_starts, self.values, self.log_probs = None, None, None, None
